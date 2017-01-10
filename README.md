@@ -26,9 +26,10 @@ $ node server.js &
 
 If you want to start it at boot, you can add this to your crontab (your paths may be different):
 
+```
 @reboot export NODE_PATH=/usr/lib/nodejs:/usr/lib/node_modules:/usr/share/javascript && sudo -E /usr/bin/forever start -o /home/pi/projects/nodeapps/drinkbot/backend.log -e /home/pi/projects/nodeapps/drinkbot/backend.err /home/pi/projects/nodeapps/drinkbot/backend.js
 @reboot export NODE_PATH=/usr/lib/nodejs:/usr/lib/node_modules:/usr/share/javascript &&  /usr/bin/forever start -o /home/pi/projects/nodeapps/drinkbot/frontend/server.log -e /home/pi/projects/nodeapps/drinkbot/frontend/server.err /home/pi/projects/nodeapps/drinkbot/frontend/server.js
-
+```
 
 ## To do:
 
