@@ -1,4 +1,4 @@
-# Drinkbot: A Rasperry Pi-powered Robotic Bartender
+# Drinkbot: A Raspberry Pi-powered Robotic Bartender
 
 This is the nodejs code for the Rasperry Pi-based robotic bartender (which I call drinkbot) described at:
 
@@ -16,13 +16,16 @@ Change to the folder where you downloaded the files.
 
 Start the backend:
 
+```
 $ node backend.js &
+```
 
 Start the web front-end:
 
-$ cd frontend &
-
+```
+$ cd frontend
 $ node server.js &
+```
 
 If you want to start it at boot, you can add this to your crontab (your paths may be different):
 
