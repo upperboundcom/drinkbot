@@ -1,0 +1,104 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="drinkbot">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Drinkbot</title>
+
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:20px; }
+		#drink-list 				{ margin-bottom:30px; }
+		.Pumping { 
+			font-weight: bold;
+			color: red;
+		}
+
+		.Idle {
+			font-weight: bold;
+			color: green;
+		}
+
+		.Start {
+			background-color:lightgreen;
+			font-weight:bold;
+			
+		}
+		.Stop {
+
+			background-color:pink;
+			font-weight:bold;
+		}
+
+		.DrinkMode {
+			background-color:lightgreen;
+			font-weight:bold;
+		}
+
+		.MaintMode {
+
+			background-color:pink;
+			font-weight: bold;
+		}
+	</style>
+
+	<!-- SPELLS -->
+	<script src="js/angular.min.js"></script><!-- load angular -->
+
+	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
+	
+	<script src="js/services/ingredients.js"></script>
+	<script src="js/services/systemstatus.js"></script>
+
+	<script src="js/maintenancecore.js"></script> <!-- load our main application -->
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="maintenanceController">
+	<div class="container">
+
+		<div ng-include="'navbar.html'"></div>
+		<div ng-include="'systemstatus.html'"></div>
+
+		<div id="ingredient-list" class="row">
+			<div class="col-md-12">
+
+
+				<h2>Maintenance & Cleaning</h2>
+				
+				
+				<button ng-click="setMode()" class="form-control {{ modeButtonStyle }} ">{{ buttonText }}</button>
+				
+				<table class="table table-striped">
+					<thead>
+						<tr><th>Pump</th><th>Ingredient</th><th>Status</th><th>&nbsp;</th></tr>
+					</thead>
+					<tbody>
+					
+					
+					<tr ng-repeat="ingredient in ingredients">
+						<td>{{ ingredient.pumpName }}</td><td>{{ ingredient.ingredientName }}</td>
+						<td><span class="{{ ingredient.status }}">{{ ingredient.status }}</span></td>
+						<td><input type="button" ng-disabled="{{ ingredient.isButtonDisabled }} " class="form-control {{ ingredient.command }}" value = "{{ ingredient.command }}" ng-click="togglePump(ingredient.pumpName)"></td>
+					</tr>
+					</tbody>
+				</table>
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+	</div>
+
+</body>
+</html>
+

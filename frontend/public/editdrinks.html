@@ -1,0 +1,122 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="drinkbot">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Drinkbot</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:20px; }
+		#drink-list 				{ margin-bottom:30px; }
+		ul#drink-item {
+ 		   list-style: none;
+		   margin: 1em 0;
+		   padding: 0; 
+		}
+		ul#drink-item li {
+		   font-weight: bold;
+		   margin: 0;
+		   padding: 3px 10px 5px 20px;
+		   border-bottom: 1px solid #ccc;
+		   color: #666; 
+		   background-color:#E0FFFF;
+		   border-radius: 25px;
+		   font-size:12px;
+		}
+		ul#drink-item li:hover {
+		   color: #000;
+	   background-color: #ddd; 
+			}
+
+	.drinkname {
+		font-size:17px;
+	}
+	</style>
+
+	<!-- SPELLS -->
+	<script src="js/angular.min.js"></script><!-- load angular -->
+
+	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
+	<script src="js/services/drinks.js"></script> 
+	<script src="js/services/ingredients.js"></script>
+	<script src="js/editdrinkscore.js"></script> <!-- load our main application -->
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="editDrinksController">
+	<div class="container">
+
+		<div ng-include="'navbar.html'"></div>
+		<div id="drink-list" class="row">
+			<div class="col-md-12">
+				<div ng-show="successmessage">
+				<span style="color:green;"><strong>{{ drinkName }} edited successfully.</strong></span>
+				</div>
+				<div ng-show="deletemessage">
+				<span style="color:green;"><strong>{{ drinkName }} deleted successfully.</strong></span>
+				</div>
+				<div ng-show="drinklist">
+				<h2>Select a drink to edit</h2>
+
+				<!-- LOOP OVER THE Drinks IN $scope.drinks -->
+		
+				<ul id="drink-item">		
+					<li ng-repeat="drink in drinks" ng-click="edit(drink)"  ng-init="totalSizeOz=0">
+					<span class="drinkname">{{ drink.name }} ({{ drink.ingredients | total:'amountOz' }} oz) </span>
+					<div ng-repeat="ingredient in drink.ingredients">
+					{{ ingredient.amountOz }} oz {{ ingredient.ingredientName }} (on {{ ingredient.pumpName}})
+
+					</div>
+					</li>
+				</ul>	
+				</div>
+				<div ng-show="editform">
+					<h2>Edit {{ drink.name }} </h2>
+				<form name="drinkform">
+                                <div class="form-group">
+                                <label for="name">Drink Name </label> <input type="text" class="form-control" id="name" ng-model="drinkName" value="{{ drink.name }}">
+                                </div>
+                                <table class="table table-striped">
+
+                                        <thead>
+                                                <tr><th>Ingredient</th><th>Amount (oz)</th><th>Start Pumping in (seconds)</tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                        <tr ng-repeat="ingredient in ingredients">
+                                        <td>{{ ingredient.ingredientName }} <br><small>on {{ ingredient.pumpName}}</small></td>
+                                        <td><input class="form-control" type="number" min="0" step=".25" ng-model="ingredient.amountOz" ng-blur="saveIngredient(ingredient)">
+                                        <td><input class="form-control" type="number" min="0" ng-model="ingredient.delaySec" ng-blur="saveIngredient(ingredient)">
+                                        </tbody>
+                                </table>
+					<button class= "btn-primary btn btn-block" ng-click="update(drink._id, drinkName, ingredients)">Update</button>
+					<button ng-click="cancelEdit()" class="btn btn-block">Cancel</button>
+					<button class="btn btn-block" ng-click="remove(drink._id)">Delete Drink...</button>
+				</form>
+				</div>
+
+			
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+
+		
+
+	</div>
+
+</body>
+</html>
+

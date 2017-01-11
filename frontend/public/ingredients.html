@@ -1,0 +1,78 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="drinkbot">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Drinkbot</title>
+  <script src="js/jquery.min.js"></script>
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <script src="js/bootstrap.min.js"></script>
+
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:20px; }
+		#drink-list 				{ margin-bottom:30px; }
+		.Pumping { 
+			font-weight: bold;
+			color: red;
+		}
+
+		.Idle {
+			font-weight: bold;
+			color: green;
+		}
+
+	</style>
+
+	
+	<script src="js/angular.min.js"></script>
+
+	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
+	
+	<script src="js/services/ingredients.js"></script>
+	<script src="js/services/systemstatus.js"></script>
+	<script src="js/ingredientcore.js"></script> <!-- load our main application -->
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="ingredientController">
+	<div class="container">
+
+		<div ng-include="'navbar.html'"></div>
+
+		<div ng-include="'systemstatus.html'"></div>
+		<div id="ingredient-list" class="row">
+			<div class="col-md-12">
+
+			
+				<h2>Ingredients</h2>
+				<table class="table table-striped">
+					<thead>
+						<tr><th>Pump</th><th>Ingredient</th><th>Specific Gravity</th><th>Status</th></tr>
+					</thead>
+					<tbody>
+					
+					
+					<tr ng-repeat="ingredient in ingredients"><td>{{ ingredient.pumpName }}</td><td>{{ ingredient.ingredientName }}</td><td align="right">{{ ingredient.specific_gravity }}</td><td align="center"><span class="{{ ingredient.status }}">{{ ingredient.status }}</span<</td></tr>
+					</tbody>
+				</table>
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+
+		
+
+	</div>
+
+</body>
+</html>
+

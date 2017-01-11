@@ -1,0 +1,90 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="drinkbot">
+    <head>
+        <!-- META -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <title>Drinkbot</title>
+  <script src="js/jquery.min.js"></script>
+     <link rel="stylesheet" href="css/bootstrap.min.css">
+    
+      <script src="js/bootstrap.min.js"></script>
+        
+  
+    
+    <script src="js/angular.min.js"></script>
+        <script src="js/controllers/main.js"></script> <!-- load up our controller -->
+        <script src="js/angular-toggle-switch.min.js"></script> 
+  <link rel="stylesheet" href="css/angular-toggle-switch-bootstrap-3.css"> 
+        <script src="js/settingscore.js"></script> 
+  
+        <script src="js/services/systemstatus.js"></script>
+
+   <style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:20px; }
+        </style>
+    </head>
+
+    <body ng-controller="settingsController">
+
+        <div class="container">
+
+            <div ng-include="'navbar.html'"></div>
+
+            <div ng-include="'systemstatus.html'"></div>
+        <div class="row">
+                <div class="col-md-12">
+
+                
+                    <h2>Settings</h2>
+                    <br /><br />
+                    <form role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="twiki_mode">Twiki Mode:</label>
+                            <div class="col-sm-10">
+                            <toggle-switch ng-model="twiki_mode" ng-change="updateSettings()">
+                            </toggle-switch>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="tell_jokes">Tell Jokes:</label>
+                            <div class="col-sm-10">
+                            <toggle-switch ng-model="tell_jokes" ng-change="updateSettings()">
+                            </toggle-switch>
+                            
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="joke_interval_sec">Tell Joke Every:</label>
+                            <div class="col-sm-10">
+                            <input type="number" class="form-control" id="joke-interval-sec" ng-disabled="!tell_jokes" ng-model="joke_interval_sec" ng-change="updateSettings()" /> seconds
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="control-label col-sm-2"  for="tts_lang">Text to Speech Voice: </label>
+                            <div class="col-sm-10">
+                                <select name="tts_lang" ng-change="updateSettings()" class="form-control" id="tts_lang" ng-model="tts_lang">
+                                    <option value="en-US">American English</option>
+                                    <option value="en-GB">British English</option>
+                                    <option value="de-DE">German</option>
+                                    <option value="fr-FR">French</option>
+                                    <option value="es-ES">Spanish</option>
+                                </select>
+                            </div>
+
+                        </div>
+       
+                    </form>                
+            
+            </div>
+        </div>
+    
+        </div>
+    </body>
+</html>
+

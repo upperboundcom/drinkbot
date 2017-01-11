@@ -1,0 +1,94 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="drinkbot">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>Drinkbot</title>
+
+ <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+	<style>
+		html 					{ overflow-y:scroll; }
+		body 					{ padding-top:20px; }
+		#drink-list 				{ margin-bottom:30px; }
+		.Pumping { 
+			font-weight: bold;
+			color: red;
+		}
+
+		.Idle {
+			font-weight: bold;
+			color: green;
+		}
+
+	</style>
+
+	
+	<script src="js/angular.min.js"></script><!-- load angular -->
+
+	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
+	
+	<script src="js/services/ingredients.js"></script>
+	 <script src="js/services/drinks.js"></script>
+
+	<script src="js/adddrinkcore.js"></script> <!-- load our main application -->
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="addDrinkController">
+	<div class="container">
+
+		<div ng-include="'navbar.html'"></div>
+		<div id="ingredient-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+			
+				<h2>Add a Drink</h2>
+
+				 <p class="text-center" ng-show="successMsg">
+					<span style="color:green;">Added drink.</span>
+                                </p>
+	
+
+
+				<form name="drinkform">
+				<div class="form-group">
+				<label for="name">Drink Name </label> <input type="text" class="form-control" id="name" ng-model="drinkName">
+				</div>
+				<table class="table table-striped">
+			
+					<thead>
+						<tr><th>Ingredient</th><th>Amount (oz)</th><th>Start Pumping in (seconds)</tr>
+					</thead>
+					<tbody>
+					
+					
+					<tr ng-repeat="ingredient in ingredients">
+					<td>{{ ingredient.ingredientName }} <br><small>on {{ ingredient.pumpName}}</small></td>
+					<td><input class="form-control" type="number" min="0" step=".25" ng-model="ingredient.amountOz" ng-blur="saveIngredient(ingredient)"></td>
+					<td><input class="form-control" type="number" min="0" ng-model="ingredient.delaySec" ng-blur="saveIngredient(ingredient)"><br><small>Specific gravity: {{ ingredient.specific_gravity }}</small></td></tr>
+					</tbody>
+				</table>
+				<input class="form-control" type="submit" ng-click="addDrink(drinkName, ingredients)" value="Add">
+				</form>
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+
+		
+
+	</div>
+
+</body>
+</html>
+

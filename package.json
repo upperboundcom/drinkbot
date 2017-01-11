@@ -1,0 +1,42 @@
+{
+  "name": "drinkbot",
+  "version": "1.0.0",
+  "description": "Front-end and backend code for the Drinkbot, a Raspberry Pi-based robotic bartender",
+  "main": "backend.js",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "child_process": "^1.0.2",
+    "events": "^1.1.1",
+    "express": "^4.14.0",
+    "method-override": "^2.3.7",
+    "mongoose": "^4.7.6",
+    "mongoose-random": "^0.1.1",
+    "morgan": "^1.7.0",
+    "onoff": "^1.1.1",
+    "os": "^0.1.1",
+    "picotts": "^0.1.1",
+    "util": "^0.10.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upperboundcom/drinkbot.git"
+  },
+  "keywords": [
+    "raspberry",
+    "pi",
+    "robotic",
+    "bartender",
+    "drink",
+    "mixing"
+  ],
+  "author": "Upperbound.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/upperboundcom/drinkbot/issues"
+  },
+  "homepage": "https://github.com/upperboundcom/drinkbot#readme"
+}
